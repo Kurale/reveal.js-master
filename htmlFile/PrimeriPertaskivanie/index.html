@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Интерактивная доска</title>
+  <style>
+    body { margin: 0; font-family: Roboto, sans-serif; }
+    .Generator2 {
+      width: 1600px;
+      height: 900px;
+      background: white;
+      overflow: hidden;
+      position: relative;
+    }
+    .Spawnzone {
+      width: 320px;
+      height: 832px;
+      left: 32px;
+      top: 32px;
+      position: absolute;
+      border-radius: 26px;
+      border: 4px #1764E1 solid;
+      background: rgba(178.99, 225.86, 255, 0.1);
+    }
+    .Workzone {
+      width: 1184px;
+      height: 832px;
+      left: 384px;
+      top: 32px;
+      position: absolute;
+      border-radius: 26px;
+      border: 4px #1764E1 solid;
+      background: rgba(178.99, 225.86, 255, 0.05);
+    }
+    .Objdnd, .Objdnd0, .Objdnd1, .Objdnd2, .Objdnd3, .Objdnd4, .Objdnd5,
+    .Objdnd6, .Objdnd7, .Objdnd8, .Objdnd9, .Objdnddivid, .Objdndmulti,
+    .Objdndx, .Objdndverticalline, .Objdndgorizontalline {
+      position: absolute;
+      user-select: none;
+      cursor: move;
+    }
+    .Objdnd0, .Objdnd1, .Objdnd2, .Objdnd3, .Objdnd4, .Objdnd5,
+    .Objdnd6, .Objdnd7, .Objdnd8, .Objdnd9, .Objdnddivid, .Objdndmulti,
+    .Objdndx, .Objdnd {
+      width: 64px;
+      height: 96px;
+      padding: 10px 7px;
+      background: rgba(178.99, 225.86, 255, 0.24);
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .Objdnddivid, .Objdndmulti { gap: 26px; }
+    .Ellipse1, .Ellipse2 {
+      width: 10px;
+      height: 10px;
+      background: #1764E1;
+      border-radius: 9999px;
+    }
+    .text-content {
+      align-self: stretch;
+      height: 94px;
+      text-align: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      color: #1765E2;
+      font-size: 96px;
+      font-family: Roboto;
+      font-weight: 400;
+      line-height: 112.46px;
+      word-wrap: break-word;
+    }
+    .hint {
+      left: 608px;
+      top: 864px;
+      position: absolute;
+      opacity: 0.33;
+      text-align: center;
+      color: #1764E1;
+      font-size: 24px;
+      font-family: Roboto;
+      font-weight: 400;
+      line-height: 28.12px;
+    }
+    .grid {
+      position: absolute;
+      left: 384px;
+      top: 32px;
+      width: 1184px;
+      height: 832px;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(23, 100, 225, 0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(23, 100, 225, 0.2) 1px, transparent 1px);
+      background-size: 16px 16px;
+      border-radius: 26px;
+    }
+  </style>
+</head>
+<body>
+  <div data-layer="Generator_2" class="Generator2">
+    <!-- Spawn Zone -->
+    <div data-layer="spawnZone" class="Spawnzone"></div>
+    <!-- Work Zone -->
+    <div data-layer="workZone" class="Workzone"></div>
+    <!-- Grid -->
+    <div class="grid"></div>
+    <!-- Objects in Spawn Zone -->
+    <div data-layer="objDnD0" class="Objdnd0" style="left: 160px; top: 448px;">
+      <div data-layer="0" class="text-content">0</div>
+    </div>
+    <div data-layer="objDnDdivid" class="Objdnddivid" style="left: 256px; top: 448px;">
+      <div data-layer="Ellipse 2" class="Ellipse2"></div>
+      <div data-layer="Ellipse 1" class="Ellipse1"></div>
+    </div>
+    <div data-layer="objDnDmulti" class="Objdndmulti" style="left: 64px; top: 448px;">
+      <div data-layer="Ellipse 2" class="Ellipse2"></div>
+    </div>
+    <div data-layer="objDnD=" class="Objdnd" style="left: 64px; top: 576px;">
+      <div data-layer="=" class="text-content">=</div>
+    </div>
+    <div data-layer="objDnDx" class="Objdndx" style="left: 160px; top: 576px;">
+      <div data-layer="X" class="text-content">X</div>
+    </div>
+    <div data-layer="objDnD?" class="Objdnd" style="left: 256px; top: 576px;">
+      <div data-layer="?" class="text-content">?</div>
+    </div>
+    <div data-layer="objDnD1" class="Objdnd1" style="left: 64px; top: 64px;">
+      <div data-layer="1" class="text-content">1</div>
+    </div>
+    <div data-layer="objDnD2" class="Objdnd2" style="left: 160px; top: 64px;">
+      <div data-layer="2" class="text-content">2</div>
+    </div>
+    <div data-layer="objDnD3" class="Objdnd3" style="left: 256px; top: 64px;">
+      <div data-layer="3" class="text-content">3</div>
+    </div>
+    <div data-layer="objDnD4" class="Objdnd4" style="left: 64px; top: 192px;">
+      <div data-layer="4" class="text-content">4</div>
+    </div>
+    <div data-layer="objDnD5" class="Objdnd5" style="left: 160px; top: 192px;">
+      <div data-layer="5" class="text-content">5</div>
+    </div>
+    <div data-layer="objDnD6" class="Objdnd6" style="left: 256px; top: 192px;">
+      <div data-layer="6" class="text-content">6</div>
+    </div>
+    <div data-layer="objDnD7" class="Objdnd7" style="left: 64px; top: 320px;">
+      <div data-layer="7" class="text-content">7</div>
+    </div>
+    <div data-layer="objDnD8" class="Objdnd8" style="left: 160px; top: 320px;">
+      <div data-layer="8" class="text-content">8</div>
+    </div>
+    <div data-layer="objDnD9" class="Objdnd9" style="left: 256px; top: 320px;">
+      <div data-layer="9" class="text-content">9</div>
+    </div>
+    <div data-layer="objDnDverticalLine" class="Objdndverticalline" style="left: 64px; top: 699px;">
+      <svg width="64" height="133" viewBox="0 0 64 133" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 130.5L32 2.49999" stroke="#1764E1" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div data-layer="objDnDgorizontalLine" class="Objdndgorizontalline" style="left: 96px; top: 734px;">
+      <svg width="231" height="64" viewBox="0 0 231 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 31.5H227" stroke="#1764E1" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div data-layer="hint" class="hint">перетаскивай цифры и знаки, составляй примеры, вычисляй</div>
+  </div>
+
+  <script>
+    // Получаем зоны
+    const spawnZone = document.querySelector('.Spawnzone');
+    const workZone = document.querySelector('.Workzone');
+    const generator = document.querySelector('.Generator2');
+
+    // Параметры сетки
+    const GRID_SIZE = 16;
+    const WORK_ZONE_LEFT = 384;
+    const WORK_ZONE_TOP = 32;
+    const WORK_ZONE_WIDTH = 1184;
+    const WORK_ZONE_HEIGHT = 832;
+
+    // Функция для проверки, находится ли точка в зоне
+    function isInZone(x, y, zone) {
+      const rect = zone.getBoundingClientRect();
+      return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+    }
+
+    // Функция для привязки к сетке
+    function snapToGrid(value) {
+      return Math.round(value / GRID_SIZE) * GRID_SIZE;
+    }
+
+    // Обработчик перетаскивания для клонов в рабочей зоне
+    function makeCloneDraggable(clone) {
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      clone.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        if (e.button !== 0) return; // Только левая кнопка мыши
+
+        // Вычисляем смещение
+        const rect = clone.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        isDragging = true;
+        clone.style.zIndex = 1000;
+        clone.style.background = 'rgba(178.99, 225.86, 255, 0.5)';
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+
+        let newX = e.clientX - offsetX - generator.getBoundingClientRect().left;
+        let newY = e.clientY - offsetY - generator.getBoundingClientRect().top;
+
+        // Ограничиваем перемещение внутри Generator2
+        newX = Math.max(0, Math.min(newX, 1600 - clone.offsetWidth));
+        newY = Math.max(0, Math.min(newY, 900 - clone.offsetHeight));
+
+        // Привязка к сетке в рабочей зоне
+        if (isInZone(e.clientX, e.clientY, workZone)) {
+          newX = snapToGrid(newX - WORK_ZONE_LEFT) + WORK_ZONE_LEFT;
+          newY = snapToGrid(newY - WORK_ZONE_TOP) + WORK_ZONE_TOP;
+        }
+
+        clone.style.left = `${newX}px`;
+        clone.style.top = `${newY}px`;
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        clone.style.zIndex = '';
+        clone.style.background = 'rgba(178.99, 225.86, 255, 0.24)';
+
+        // Проверяем, находится ли клон в рабочей зоне
+        const rect = clone.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        if (!isInZone(centerX, centerY, workZone)) {
+          // Если клон не в рабочей зоне, удаляем его
+          clone.remove();
+        }
+      });
+    }
+
+    // Обработчик перетаскивания для оригинальных объектов
+    function makeDraggable(originalElement) {
+      let isDragging = false;
+      let currentClone = null;
+      let offsetX, offsetY;
+
+      originalElement.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        if (e.button !== 0) return; // Только левая кнопка мыши
+
+        // Проверяем, что клик произошел в зоне спавна
+        if (!isInZone(e.clientX, e.clientY, spawnZone)) return;
+
+        // Создаем клон
+        currentClone = originalElement.cloneNode(true);
+        currentClone.style.position = 'absolute';
+        currentClone.style.zIndex = 1000;
+
+        // Устанавливаем начальную позицию клона рядом с оригиналом (с небольшим смещением)
+        const originalRect = originalElement.getBoundingClientRect();
+        currentClone.style.left = `${originalRect.left - generator.getBoundingClientRect().left + 10}px`;
+        currentClone.style.top = `${originalRect.top - generator.getBoundingClientRect().top + 10}px`;
+
+        generator.appendChild(currentClone);
+        isDragging = true;
+
+        // Вычисляем смещение для корректного перетаскивания
+        const cloneRect = currentClone.getBoundingClientRect();
+        offsetX = e.clientX - cloneRect.left;
+        offsetY = e.clientY - cloneRect.top;
+
+        // Подсветка при перетаскивании
+        currentClone.style.background = 'rgba(178.99, 225.86, 255, 0.5)';
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging || !currentClone) return;
+
+        let newX = e.clientX - offsetX - generator.getBoundingClientRect().left;
+        let newY = e.clientY - offsetY - generator.getBoundingClientRect().top;
+
+        // Ограничиваем перемещение внутри Generator2
+        newX = Math.max(0, Math.min(newX, 1600 - currentClone.offsetWidth));
+        newY = Math.max(0, Math.min(newY, 900 - currentClone.offsetHeight));
+
+        // Привязка к сетке в рабочей зоне
+        if (isInZone(e.clientX, e.clientY, workZone)) {
+          newX = snapToGrid(newX - WORK_ZONE_LEFT) + WORK_ZONE_LEFT;
+          newY = snapToGrid(newY - WORK_ZONE_TOP) + WORK_ZONE_TOP;
+        }
+
+        currentClone.style.left = `${newX}px`;
+        currentClone.style.top = `${newY}px`;
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (!isDragging || !currentClone) return;
+        isDragging = false;
+
+        // Возвращаем подсветку
+        currentClone.style.background = 'rgba(178.99, 225.86, 255, 0.24)';
+        currentClone.style.zIndex = '';
+
+        // Проверяем, находится ли клон в рабочей зоне
+        const rect = currentClone.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        if (!isInZone(centerX, centerY, workZone)) {
+          // Если клон не в рабочей зоне, удаляем его
+          currentClone.remove();
+        } else {
+          // Делаем клон перетаскиваемым
+          makeCloneDraggable(currentClone);
+          // Добавляем обработчик удаления по правой кнопке мыши
+          currentClone.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            e.currentTarget.remove();
+          });
+        }
+
+        currentClone = null;
+      });
+    }
+
+    // Делаем все объекты в зоне спавна перетаскиваемыми
+    document.querySelectorAll('[data-layer^="objDnD"]').forEach(element => {
+      makeDraggable(element);
+    });
+  </script>
+</body>
+</html>
